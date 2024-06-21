@@ -14591,6 +14591,26 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
+<h1>Télécharger le sujet</h1>
+
+<!-- HTML link to download the file -->
+<a href="./sujet.html" download="sujet.html"></a>
+
+<!-- Button to trigger file download using JavaScript -->
+<button onclick="downloadFile()">Download sujet.html</button>
+
+<!-- JavaScript function to trigger file download -->
+<script>
+    function downloadFile() {
+        const link = document.createElement('a');
+        link.href = './sujet.html';
+        link.download = 'sujet.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
