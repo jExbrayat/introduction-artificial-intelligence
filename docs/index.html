@@ -15325,26 +15325,28 @@ $$ \pi = \frac{1}{n} \sum_{i=1}^{n} y_i = \bar{y}$$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>A présent, calculons $\hat{\mu_0}, \hat{\mu_1}$ et $\hat{\Sigma}$</strong></p>
-$$\begin{align*}
 
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$
+\begin{align*}
 L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma)
-    &amp; = log \hspace{8px} p(x_1,...x_n | y_1,...,y_n, \mu_0, \mu_1, \Sigma) \\
-    &amp; = \sum_{i=1}^n log \hspace{8px} p(x_i | y_i, \mu_0, \mu_1, \Sigma) \\
-    &amp; = \begin{align*}
-        \sum_{i=1}^n
-            &amp; \mathbb{1}_{y_i = 0} \cdot log \hspace{8px} \frac{1}{\sqrt{2\pi^{2}|\Sigma|}} \cdot \exp^{-\frac{1}{2} (x_i - \mu_0)^T \Sigma^{-1} (x_i - \mu_0)} \\
-            &amp; \mathbb{1}_{y_i = 1} \cdot log \hspace{8px} \frac{1}{\sqrt{2\pi^{2}|\Sigma|}} \cdot \exp^{-\frac{1}{2} (x_i - \mu_1)^T \Sigma^{-1} (x_i - \mu_1)} \\
-        \end{align*}
-        \\
-    &amp; = \begin{align*}
-        \sum_{i=1}^n
-            &amp; \mathbb{1}_{y_i = 0} \cdot [ \frac{1}{2} \cdot log(2\pi^{2}|\Sigma|) - \frac{1}{2}
-            \cdot (x_i - \mu_0)^T \Sigma^{-1} (x_i - \mu_0) ] \\
-            &amp; \mathbb{1}_{y_i = 1} \cdot [ \frac{1}{2} \cdot log(2\pi^{2}|\Sigma|) - \frac{1}{2}
-            \cdot (x_i - \mu_1)^T \Sigma^{-1} (x_i - \mu_1) ]
-        \end{align*}
-
-\end{align*}$$
+    &amp; = \log p(x_1, \ldots, x_n | y_1, \ldots, y_n, \mu_0, \mu_1, \Sigma) \\
+    &amp; = \sum_{i=1}^n \log p(x_i | y_i, \mu_0, \mu_1, \Sigma) \\
+    &amp; = \sum_{i=1}^n \left[ \mathbb{1}_{y_i = 0} \cdot \log \left( \frac{1}{\sqrt{(2\pi)^2 |\Sigma|}} \exp\left( -\frac{1}{2} (x_i - \mu_0)^T \Sigma^{-1} (x_i - \mu_0) \right) \right) \right. \\
+    &amp; \quad \left. + \mathbb{1}_{y_i = 1} \cdot \log \left( \frac{1}{\sqrt{(2\pi)^2 |\Sigma|}} \exp\left( -\frac{1}{2} (x_i - \mu_1)^T \Sigma^{-1} (x_i - \mu_1) \right) \right) \right] \\
+    &amp; = \sum_{i=1}^n \left[ \mathbb{1}_{y_i = 0} \cdot \left( - \log(2\pi) - \frac{1}{2} \log|\Sigma| - \frac{1}{2} (x_i - \mu_0)^T \Sigma^{-1} (x_i - \mu_0) \right) \right. \\
+    &amp; \quad \left. + \mathbb{1}_{y_i = 1} \cdot \left( - \log(2\pi) - \frac{1}{2} \log|\Sigma| - \frac{1}{2} (x_i - \mu_1)^T \Sigma^{-1} (x_i - \mu_1) \right) \right]
+\end{align*}
+$$
 </div>
 </div>
 </div>
@@ -17574,7 +17576,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Accuracy sur les données d'entraînement / de test :</strong></p>
-<p>L'<em>accuracy</em> - la justesse de prédiction -, pour tous nos modèles et sur tous nos jeux de données, est supérieure pour les données d'entraînement.</p>
+<p>L'<em>accuracy</em> - la justesse de prédiction - pour tous nos modèles et sur tous nos jeux de données, est supérieure pour les données d'entraînement.</p>
 <p>Cela était attendu car le modèle s'ajuste sur les données d'entraînement, il apprend sur celles-ci, alors qu'il n'a pas connaissance des <em>labels</em> des données de test.</p>
 <p>La métrique qui nous importe le plus pour sélectionner un modèle de prédiction est l'<em>accuracy</em> de test. En effet, c'est elle qui donne une idée du pouvoir de généralisation du modèle.</p>
 <p>Si l'on voulait un modèle uniquement descriptif, on pourrait ne pas faire de <em>train test split</em>, et choisir le modèle avec le meilleur score (par exemple pour l'explication d'un phénomène en économétrie).</p>
