@@ -14465,6 +14465,10 @@ a.anchor-link {
   display: none;
 }
 
+.highlight  {
+  margin: 0.4em;
+}
+
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14474,26 +14478,9 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror.cm-s-jupyter .highlight pre {
-/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
-  padding: var(--jp-code-padding) 4px;
+.CodeMirror pre {
   margin: 0;
-
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-
-}
-
-.jp-OutputArea-output pre {
-  line-height: inherit;
-  font-family: inherit;
-}
-
-.jp-RenderedText pre {
-  color: var(--jp-content-font-color1);
-  font-size: var(--jp-code-font-size);
+  padding: 0;
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14537,10 +14524,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
-}
-
-@page {
-    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14678,7 +14661,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load RData file</span>
-<span class="n">rdata</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;data/decathlon.RData&quot;</span><span class="p">)</span>
+<span class="n">rdata</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">"data/decathlon.RData"</span><span class="p">)</span>
 <span class="n">rdata</span>
 </pre></div>
 
@@ -14693,7 +14676,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[165]:</div>
 
@@ -14806,7 +14791,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Access the data frame from the loaded RData file</span>
-<span class="n">decathlon</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">]</span>
+<span class="n">decathlon</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span>
 <span class="n">decathlon</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -14821,7 +14806,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[166]:</div>
 
@@ -14957,7 +14944,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Convert the data frame to a CSV file</span>
-<span class="n">decathlon</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data/decathlon.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">decathlon</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"data/decathlon.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14985,12 +14972,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;data/train</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"data/train</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">" "</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]</span>
 <span class="p">}</span>
-<span class="n">train</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+<span class="n">train</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -15004,7 +14991,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[168]:</div>
 
@@ -15122,12 +15111,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;data/test</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"data/test</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">" "</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]</span>
 <span class="p">}</span>
-<span class="n">test</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+<span class="n">test</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -15141,7 +15130,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[169]:</div>
 
@@ -15290,15 +15281,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\begin{align}
+$$\begin{align*}
 
 L_{(x_i, y_i)_i}(\pi, \mu_0, \mu_1, \Sigma) 
     &amp; = log \hspace{8px} p(x_1,..., x_n, y_1,...y_n | \pi, \mu_0, \mu_1, \Sigma) \\
     &amp; = \sum_{i=1}^n log \hspace{8px} p(x_i, y_i | \pi, \mu_0, \mu_1, \Sigma) \\
     &amp; = \sum_{i=1}^n log \hspace{8px} p(x_i | y_i, \mu_0, \mu_1, \Sigma) * p(y_i | \pi) \\
     &amp; = \sum_{i=1}^n log \hspace{8px} p(x_i | y_i, \mu_0, \mu_1, \Sigma) + \sum_{i=1}^n log \hspace{8px} p(y_i | \pi)
-\end{align}$$<p>On remarque qu'en dérivant par rapport à $\pi$ dans (4), on perdra la somme de gauche.<br />
-De même, en dérivant par rapport à $\mu_0, \mu_1$ ou $\Sigma$, on perdra la somme de droite.<br />
+\end{align*}$$<p>On remarque qu'en dérivant par rapport à $\pi$ dans (4), on perdra la somme de gauche.<br>
+De même, en dérivant par rapport à $\mu_0, \mu_1$ ou $\Sigma$, on perdra la somme de droite.<br>
 On va donc calculer $\hat{\pi}_{EMV}$ et $\hat{\mu_0}_{EMV}$, $\hat{\mu_1}_{EMV}$, $\hat{\Sigma}_{EMV}$ à part.</p>
 
 </div>
@@ -15325,7 +15316,7 @@ $$\begin{align*}
 \nabla_\pi(L_{(y_i)_i}(\pi)) &amp; = \sum_{i=1}^n \frac{y_i}{\pi} - \frac{1}{1-\pi} + \frac{y_i}{1-\pi} \\
     &amp; = - \frac{n}{1-\pi} + \sum_{i=1}^n \frac{y_i}{\pi(1-\pi)}
 
-\end{align*}$$<p>Maximiser la vraisemblance revient à maximiser la log-vraisemblance par croissance de la fonction logarithme sur $[0, 1]$, l'ensemble de définition de $\pi$.<br />
+\end{align*}$$<p>Maximiser la vraisemblance revient à maximiser la log-vraisemblance par croissance de la fonction logarithme sur $[0, 1]$, l'ensemble de définition de $\pi$.<br>
 Déterminons la valeur de $\pi$ qui maximise la log-vraisemblance.</p>
 <p>Soit $\pi \in [0, 1] / \nabla_\pi(L_{(y_i)_i}(\pi)) = 0$,
 alors on a
@@ -15381,21 +15372,16 @@ $$
 $$
 \nabla_{\mu_0}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma))
     = - \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot \Sigma^{-1} \cdot (x_i - \mu_0)
-$$<p>Et alors, on peut maximiser la log vraisemblance.<br />
-Soit $\mu_0 \in \mathbb{R}^2 / \nabla_{\mu_0}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma)) = 0_2$, on a alors
+$$<p>Et alors, on peut maximiser la log vraisemblance.<br>
+Soit $\mu_0 \in \mathbb{R}^2 / \nabla_{\mu_0}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma)) = 0_2$, on a alors</p>
+$$ - \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot ( \Sigma^{-1} \cdot x_i - \Sigma^{-1} \cdot \mu_0 ) = 0
+$$<p>Introduisons les notations $n_0 = card\{i \in [1;n] / y_i = 0\}$, le nombre d'individus dans la classe 0,<br>
+et $\bar{x_0} = \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot x_i$, la moyenne des individus de la classe 0.</p>
+<p>On a alors
+$$ n_0 \cdot \Sigma^{-1} \mu_0 = \Sigma^{-1} \cdot \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot x_i
 $$</p>
-<ul>
-<li>\sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot ( \Sigma^{-1} \cdot x_i - \Sigma^{-1} \cdot \mu_0 ) = 0</li>
-</ul>
-$$
-Introduisons les notations $n_0 = card\{i \in [1;n] / y_i = 0\}$, le nombre d'individus dans la classe 0,  
-et $\bar{x_0} = \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot x_i$, la moyenne des individus de la classe 0.  
-
-On a alors
-$$<p>n_0 \cdot \Sigma^{-1} \mu_0 = \Sigma^{-1} \cdot \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} \cdot x_i
-$$
-Et donc
-$$\boxed{\mu_0 = \hat{\mu_0} = \frac{\bar{x_0}}{n_0}}
+<p>Et donc
+$$ \boxed{\mu_0 = \hat{\mu_0} = \frac{\bar{x_0}}{n_0}}
 $$</p>
 
 </div>
@@ -15420,9 +15406,9 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Calcul de $\hat{\Sigma}$ :</strong><br />
+<p><strong>Calcul de $\hat{\Sigma}$ :</strong><br>
 On sait que $\displaystyle \hat{\Sigma_{EMV}} = \sum_{i=1}^{n} (x_i - \hat{\mu_{EMV}}) \cdot (x_i - \hat{\mu_{EMV}})^T$ pour un vecteur aléatoire gaussien.</p>
-<p>Dans notre cas à deux classes,
+<p>Dans notre cas à deux classes,</p>
 $$\hat{\Sigma_{EMV}} = 
     \frac{
         \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} (x_i - \hat{\mu_0}) \cdot (x_i - \hat{\mu_0})^T
@@ -15430,9 +15416,8 @@ $$\hat{\Sigma_{EMV}} =
         }{
             n
         }
-$$</p>
-<p><strong>Justification :</strong><br />
-En réutilisant la preuve du cours,<br />
+$$<p><strong>Justification :</strong><br>
+En réutilisant la preuve du cours,</p>
 $$
 \begin{align*}
 \nabla_{\Sigma}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma))
@@ -15442,11 +15427,10 @@ $$
     &amp;-
     \frac{n_1}{2}\Sigma^{-1}
     + \frac{1}{2}\Sigma^{-1} \cdot \sum_{i=1}^{n} \mathbb{1}_{y_i = 1} (x_i - \mu_1) \cdot (x_i - \mu_1)^T \cdot \Sigma^{-1}
-\end{align*}
-$$
-On peut alors maximiser la vraisemblance :</p>
-<p>$\nabla_{\Sigma}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma)) = 0_{(2,2)}$</p>
+\end{align*}$$<p>On peut alors maximiser la vraisemblance :</p>
 $$\Leftrightarrow
+0_{(2,2)} = \nabla_{\Sigma}(L_{(x_i)_i}(y_i, \mu_0, \mu_1, \Sigma)) 
+$$$$\Leftrightarrow
 \begin{align*}
 0   =
     &amp;- \frac{n_0}{2}\Sigma + \frac{1}{2} \sum_{i=1}^{n} \mathbb{1}_{y_i = 0} (x_i - \mu_0) \cdot (x_i - \mu_0)^T \\
@@ -15490,14 +15474,14 @@ $$
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>On rappel que l'on note $p(x|\theta)$ la fonction de densité de la loi marginale de $X$ de paramètre $\theta$ évaluée en $x$.
-$$\begin{align}
+$$\begin{align*}
 P(Y=1 | X=x)
     &amp;= \frac{p(x | y=1, \theta) \cdot p(y=1|\pi)}{p(x | \theta)} \\
     &amp;= \frac{\mathcal{N}(x ; \mu_1, \Sigma) \cdot \pi}{p(x | \theta)} \\
-\end{align}
+\end{align*}
 $$
 Par renversement du conditionnement avec la formule de Bayes.</p>
-<p>On peut calculer la loi marginale de $X$ au dénominateur :
+<p>On peut calculer la loi marginale de $X$ au dénominateur :</p>
 $$
 \begin{align*}
 p(x | \theta)
@@ -15505,8 +15489,7 @@ p(x | \theta)
     =&amp; \frac{1}{\sqrt{2\pi^{2}|\Sigma|}} \cdot e^{-\frac{1}{2} (x - \mu_0)^T \Sigma^{-1} (x - \mu_0)} \cdot (1-\pi)
     + \frac{1}{\sqrt{2\pi^{2}|\Sigma|}} \cdot e^{-\frac{1}{2} (x - \mu_1)^T \Sigma^{-1} (x - \mu_1)} \cdot \pi
 \end{align*}
-$$
-$X$ est un mélange de gaussiennes de même matrices de variances covariances et de moyennes différentes.</p>
+$$<p>$X$ est un mélange de gaussiennes de même matrices de variances covariances et de moyennes différentes.</p>
 
 </div>
 </div>
@@ -15569,7 +15552,7 @@ P(Y=1 | X=x)
         )}
 \end{align*}
 $$<p>En notant $\beta = \Sigma^{-1} (\mu_1 - \mu_0)$ et $\beta_0 = \frac{1}{2} \mu_0 \Sigma^{-1} \mu_0 - \frac{1}{2} \mu_1 \Sigma^{-1} \mu_1$</p>
-<p>Pour une valeur de $\pi \in [0 ; 1]$ quelconque, on remarque que l'on a un critère de classification plus riche que la régression logistique.<br />
+<p>Pour une valeur de $\pi \in [0 ; 1]$ quelconque, on remarque que l'on a un critère de classification plus riche que la régression logistique.<br>
 En effet, l'analyse linéaire discriminante prend en compte les poids associés aux classes :</p>
 $$ P(Y=1 | X=x) = \frac{1}{1 + \frac{1 - \pi}{\pi} \exp(x^T \beta + \beta_0)} $$
 </div>
@@ -15607,16 +15590,16 @@ $$ P(Y=1 | X=x) = \frac{1}{1 + \frac{1 - \pi}{\pi} \exp(x^T \beta + \beta_0)} $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_pi_mle</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate maximum likelihood estimator for pi</span>
+<span class="w">    </span><span class="sd">"""Calculate maximum likelihood estimator for pi</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        dataset (pd.DataFrame): Dataset containing a binary class column named &quot;y&quot;</span>
+<span class="sd">        dataset (pd.DataFrame): Dataset containing a binary class column named "y"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: Maximum likelihood for pi</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"y"</span><span class="p">]</span>
     <span class="n">pi_mle</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">pi_mle</span>
@@ -15636,22 +15619,22 @@ $$ P(Y=1 | X=x) = \frac{1}{1 + \frac{1 - \pi}{\pi} \exp(x^T \beta + \beta_0)} $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_mu_mle</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate maximum likelihood estimator for mu_0 and mu_1</span>
+<span class="w">    </span><span class="sd">"""Calculate maximum likelihood estimator for mu_0 and mu_1</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        dataset (pd.DataFrame): Two dimensional dataset (&quot;x1&quot;, &quot;x2&quot;) with a binary class column &quot;y&quot;</span>
+<span class="sd">        dataset (pd.DataFrame): Two dimensional dataset ("x1", "x2") with a binary class column "y"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple: (mu0_mle, mu1_mle)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># Split dataset based on class</span>
-    <span class="n">class0</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">class1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">class0</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">class1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># Calculate mu0_mle and mu1_mle</span>
-    <span class="n">mu0_mle</span> <span class="o">=</span> <span class="n">class0</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">class0</span><span class="p">)</span>
-    <span class="n">mu1_mle</span> <span class="o">=</span> <span class="n">class1</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">class1</span><span class="p">)</span>
+    <span class="n">mu0_mle</span> <span class="o">=</span> <span class="n">class0</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">class0</span><span class="p">)</span>
+    <span class="n">mu1_mle</span> <span class="o">=</span> <span class="n">class1</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">class1</span><span class="p">)</span>
 
     <span class="c1"># Convert as numpy array</span>
     <span class="n">mu0_mle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mu0_mle</span><span class="p">)</span>
@@ -15674,23 +15657,23 @@ $$ P(Y=1 | X=x) = \frac{1}{1 + \frac{1 - \pi}{\pi} \exp(x^T \beta + \beta_0)} $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_sigma_mle</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">mu0_mle</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu1_mle</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate maximum likelihood for variance covariance matrix</span>
+<span class="w">    </span><span class="sd">"""Calculate maximum likelihood for variance covariance matrix</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        dataset (pd.DataFrame): Two dimensional dataset (&quot;x1&quot;, &quot;x2&quot;) with a binary class column &quot;y&quot;</span>
+<span class="sd">        dataset (pd.DataFrame): Two dimensional dataset ("x1", "x2") with a binary class column "y"</span>
 <span class="sd">        mu0_mle (float): MLE for mu0</span>
 <span class="sd">        mu1_mle (float): MLE for mu1</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        np.ndarray: MLE for sigma of shape (2, 2)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Split dataset based on class</span>
-    <span class="n">class0</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">class1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">class0</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">class1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># Transform into numpy array for easier computation</span>
-    <span class="n">class0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">class0</span><span class="p">[[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]])</span>
-    <span class="n">class1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">class1</span><span class="p">[[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]])</span>
+    <span class="n">class0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">class0</span><span class="p">[[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]])</span>
+    <span class="n">class1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">class1</span><span class="p">[[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]])</span>
 
     <span class="n">sum_over_class1</span> <span class="o">=</span> <span class="p">(</span><span class="n">class0</span> <span class="o">-</span> <span class="n">mu0_mle</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span>
         <span class="n">class0</span> <span class="o">-</span> <span class="n">mu0_mle</span>
@@ -15733,7 +15716,7 @@ $$ P(Y=1 | X=x) = \frac{1}{1 + \frac{1 - \pi}{\pi} \exp(x^T \beta + \beta_0)} $$
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Apply MLE to train data</span>
 
 
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span>
 
 <span class="n">pi_mle</span> <span class="o">=</span> <span class="n">calc_pi_mle</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 <span class="n">mu0_mle</span><span class="p">,</span> <span class="n">mu1_mle</span> <span class="o">=</span> <span class="n">calc_mu_mle</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
@@ -15802,13 +15785,12 @@ $$
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Notons $x^T = (x_1, x_2)$ et $\mu_1 - \mu_0 = \lambda = (\lambda_1, \lambda_2)$<br />
-Alors 
+<p>Notons $x^T = (x_1, x_2)$ et $\mu_1 - \mu_0 = \lambda = (\lambda_1, \lambda_2)$<br>
+Alors</p>
 $$ x^T \Sigma^{-1} (\mu_1 - \mu_0)
     = x_1 \cdot (\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_2)
     + x_2 \cdot (\Sigma^{-1}_{2,1} \lambda_1 + \Sigma^{-1}_{2,2} \lambda_2)
-$$</p>
-<p>Avec cette forme développée, nous pouvons expliciter la formule de la droite d'équation
+$$<p>Avec cette forme développée, nous pouvons expliciter la formule de la droite d'équation
 $P(Y=1|X=x) = \frac{1}{2}$</p>
 
 </div>
@@ -15910,8 +15892,8 @@ $$<p>sous réserve que $\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Predict dataset by hand</span>
 
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
 <span class="c1"># Calculate proba</span>
 
@@ -15929,7 +15911,7 @@ $$<p>sous réserve que $\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">proba</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">for</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">y_pred_proba</span>
-<span class="p">]</span>  <span class="c1"># I don&#39;t know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
+<span class="p">]</span>  <span class="c1"># I don't know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
 </pre></div>
 
      </div>
@@ -15946,28 +15928,28 @@ $$<p>sous réserve que $\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot datapoints and the decision border for a specified matplotlib ax.</span>
+<span class="w">    </span><span class="sd">"""Plot datapoints and the decision border for a specified matplotlib ax.</span>
 <span class="sd">    Warning: this function is intended to work specifically in this notebook,</span>
 <span class="sd">    as outside variables are called inside the function</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        cmap (str): Method used to color data points</span>
 <span class="sd">        ax (_type_): Matplotlib ax</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">cmap</span> <span class="o">==</span> <span class="s2">&quot;pred&quot;</span><span class="p">:</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">cmap</span> <span class="o">==</span> <span class="s2">"pred"</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">y_pred</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Points colorés en fonction de leur classe prédite&quot;</span>
-    <span class="k">elif</span> <span class="n">cmap</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">:</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">"Points colorés en fonction de leur classe prédite"</span>
+    <span class="k">elif</span> <span class="n">cmap</span> <span class="o">==</span> <span class="s2">"true"</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">y</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Points colorés en fonction de leur vraie classe&quot;</span>
-    <span class="k">elif</span> <span class="n">cmap</span><span class="o">==</span><span class="s2">&quot;true_pred&quot;</span><span class="p">:</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">"Points colorés en fonction de leur vraie classe"</span>
+    <span class="k">elif</span> <span class="n">cmap</span><span class="o">==</span><span class="s2">"true_pred"</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y_pred</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Points colorés en fonction de s&#39;ils sont bien classés&quot;</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">"Points colorés en fonction de s'ils sont bien classés"</span>
 
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;x1&quot;</span><span class="p">],</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;x2&quot;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;copper&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_xx2</span><span class="p">,</span> <span class="n">xx2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Frontière de décision&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"x1"</span><span class="p">],</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"x2"</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"copper"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_xx2</span><span class="p">,</span> <span class="n">xx2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Frontière de décision"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x1"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"x2"</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">])</span>
@@ -15990,9 +15972,9 @@ $$<p>sous réserve que $\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot data points and decision border</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true_pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true_pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -16007,7 +15989,9 @@ $$<p>sous réserve que $\Sigma^{-1}_{1,1} \lambda_1 + \Sigma^{-1}_{1,2} \lambda_
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16103,8 +16087,8 @@ $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define X and y</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"y"</span><span class="p">]</span>
 
 <span class="c1"># Add bias to X</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">X</span><span class="p">]</span>
@@ -16133,7 +16117,7 @@ $$
 
 <span class="c1"># Print parameters of the model</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">beta_hat</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;beta_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"beta_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16147,7 +16131,9 @@ $$
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16244,9 +16230,9 @@ $$<p>Dans cas où $\beta_1 = 0$, la variable $x_1$ n'est simplement pas prise en
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot data points and decision border</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true_pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true_pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -16261,7 +16247,9 @@ $$<p>Dans cas où $\beta_1 = 0$, la variable $x_1$ n'est simplement pas prise en
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16350,7 +16338,7 @@ $$</p>
 
 <span class="c1"># Print parameters</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">beta_hat</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;beta_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"beta_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16364,7 +16352,9 @@ $$</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16457,9 +16447,9 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot data points and decision border</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;true_pred&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_datapoints_decision_border</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"true_pred"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -16474,7 +16464,9 @@ $$</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16554,7 +16546,7 @@ class="
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Define X</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
 <span class="c1"># Convert data to PyTorch tensors</span>
 <span class="n">X_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -16608,7 +16600,7 @@ class="
     <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch [</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">], Loss: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Epoch [</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">], Loss: </span><span class="si">{:.4f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
 </pre></div>
 
      </div>
@@ -16622,7 +16614,9 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16672,7 +16666,9 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16774,7 +16770,9 @@ fc6.bias tensor([-0.3357])
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[193]:</div>
 
@@ -16818,7 +16816,9 @@ fc6.bias tensor([-0.3357])
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[194]:</div>
 
@@ -16862,7 +16862,9 @@ fc6.bias tensor([-0.3357])
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[195]:</div>
 
@@ -16888,11 +16890,11 @@ fc6.bias tensor([-0.3357])
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot datapoints and decision border</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">y_pred_grid</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;copper&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;copper&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Nuage de points avec la frontière de décision&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">y_pred_grid</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"copper"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"copper"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"X1"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"X2"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Nuage de points avec la frontière de décision"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -16907,7 +16909,9 @@ fc6.bias tensor([-0.3357])
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -16978,14 +16982,14 @@ class="
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_hat</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make prediction for logistic regression with two dimensional data</span>
+<span class="w">        </span><span class="sd">"""Make prediction for logistic regression with two dimensional data</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            X (np.ndarray): Dataset + column of ones for bias</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            tuple: predictions and predicted proba</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Retrieve parameters</span>
         <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_hat</span>
 
@@ -17026,7 +17030,7 @@ class="
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_hat</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make prediction for linear regression with two dimensional data</span>
+<span class="w">        </span><span class="sd">"""Make prediction for linear regression with two dimensional data</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            X (np.ndarray): Dataset + column of ones for bias</span>
@@ -17034,7 +17038,7 @@ class="
 
 <span class="sd">        Returns:</span>
 <span class="sd">            tuple: predictions and predicted proba</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Retrieve parameters</span>
         <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_hat</span>
 
@@ -17066,7 +17070,7 @@ class="
 
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Adapt data to MLE calculation function</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"x1"</span><span class="p">:</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"x2"</span><span class="p">:</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"y"</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
 
         <span class="c1"># Make calculus</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pi</span> <span class="o">=</span> <span class="n">calc_pi_mle</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -17077,14 +17081,14 @@ class="
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mu1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make prediction for linear discriminant analysis</span>
+<span class="w">        </span><span class="sd">"""Make prediction for linear discriminant analysis</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            X (np.ndarray): Two dimensional dataset</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            tuple: predictions and predicted proba</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Retrieve parameters</span>
         <span class="n">pi</span><span class="p">,</span> <span class="n">mu0</span><span class="p">,</span> <span class="n">mu1</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
         <span class="n">Sigma_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span>
@@ -17105,7 +17109,7 @@ class="
 
         <span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">proba</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">for</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">y_pred_proba</span>
-        <span class="p">]</span>  <span class="c1"># I don&#39;t know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
+        <span class="p">]</span>  <span class="c1"># I don't know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
 
         <span class="k">return</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_proba</span>
 </pre></div>
@@ -17151,21 +17155,21 @@ class="
             <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make prediction for neural network</span>
+<span class="w">        </span><span class="sd">"""Make prediction for neural network</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            X (np.ndarray): Two dimensional dataset</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            tuple: predictions and predicted proba</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">X_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
         <span class="n">y_pred_proba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X_tensor</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 
         <span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">proba</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">for</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">y_pred_proba</span>
-        <span class="p">]</span>  <span class="c1"># I don&#39;t know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
+        <span class="p">]</span>  <span class="c1"># I don't know why I must take proba &lt; 0.5 and not &gt; 0.5</span>
 
         <span class="k">return</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred_proba</span>
 </pre></div>
@@ -17187,15 +17191,15 @@ class="
 <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="c1"># Iterate over datasets</span>
-<span class="k">for</span> <span class="n">dataset_index</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">dataset_index</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]:</span>
     <span class="c1"># Define train test split</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">train</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
-        <span class="n">test</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="n">train</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="n">test</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
     <span class="p">)</span>
     <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">train</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
-        <span class="n">test</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="n">train</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="n">test</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
     <span class="p">)</span>
 
     <span class="c1"># Init results storage</span>
@@ -17220,9 +17224,9 @@ class="
         <span class="c1"># Append result</span>
         <span class="n">results</span><span class="p">[</span><span class="n">dataset_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">&quot;Model&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                <span class="s2">&quot;Train Accuracy&quot;</span><span class="p">:</span> <span class="n">train_accuracy</span><span class="p">,</span>
-                <span class="s2">&quot;Test Accuracy&quot;</span><span class="p">:</span> <span class="n">test_accuracy</span><span class="p">,</span>
+                <span class="s2">"Model"</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="s2">"Train Accuracy"</span><span class="p">:</span> <span class="n">train_accuracy</span><span class="p">,</span>
+                <span class="s2">"Test Accuracy"</span><span class="p">:</span> <span class="n">test_accuracy</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
 
@@ -17240,7 +17244,9 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -17292,7 +17298,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[202]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -17306,7 +17312,9 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[202]:</div>
 
@@ -17392,7 +17400,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[203]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -17406,7 +17414,9 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[203]:</div>
 
@@ -17492,7 +17502,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[204]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -17506,7 +17516,9 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[204]:</div>
 
@@ -17583,7 +17595,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <p>Quelles méthodes donnent des résultats très similaires/différents ?</p>
 <p>Quelles méthodes donnent les meilleurs résultats sur les différents jeux de données ?</p>
 <p>Donner une interprétation.</p>
-<hr />
+<hr>
 
 </div>
 </div>
@@ -17612,7 +17624,7 @@ C:\Users\jules\AppData\Local\Temp\ipykernel_9360\2109762546.py:11: RuntimeWarnin
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Comparaisons des différentes méthodes :</strong></p>
-<p>Toutes les méthodes donnent des résultats très similaires.<br />
+<p>Toutes les méthodes donnent des résultats très similaires.<br>
 Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 
 </div>
@@ -17626,28 +17638,27 @@ Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <table>
-<thead>
-<tr>
-  <th>Dataset</th>
-  <th>Meilleur modèle</th>
-  <th>Justesse de prédiction (%)</th>
+<thead><tr>
+<th>Dataset</th>
+<th>Meilleur modèle</th>
+<th>Justesse de prédiction (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>A</td>
-  <td>Analyse linéaire discriminante</td>
-  <td>99</td>
+<td>A</td>
+<td>Analyse linéaire discriminante</td>
+<td>99</td>
 </tr>
 <tr>
-  <td>B</td>
-  <td>Régression logistique</td>
-  <td>96.5</td>
+<td>B</td>
+<td>Régression logistique</td>
+<td>96.5</td>
 </tr>
 <tr>
-  <td>C</td>
-  <td>Analyse linéaire discriminante</td>
-  <td>96.7</td>
+<td>C</td>
+<td>Analyse linéaire discriminante</td>
+<td>96.7</td>
 </tr>
 </tbody>
 </table>
@@ -17701,7 +17712,7 @@ Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Rename index column</span>
-<span class="n">decathlon</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">decathlon</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -17732,7 +17743,9 @@ Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[206]:</div>
 
@@ -17867,8 +17880,8 @@ Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[207]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nombre d&#39;athlètes : </span><span class="si">{</span><span class="n">decathlon</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nombre de lignes dans le jeu de données : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nombre d'athlètes : </span><span class="si">{</span><span class="n">decathlon</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nombre de lignes dans le jeu de données : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -17882,7 +17895,9 @@ Les <em>accuracy</em> de test varient entre 95 et 99%:</p>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -17933,7 +17948,9 @@ Nombre de lignes dans le jeu de données : 41
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[208]:</div>
 
@@ -18145,7 +18162,7 @@ Nombre de lignes dans le jeu de données : 41
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     <span class="c1"># Define model</span>
     <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span>
-        <span class="n">covariance_type</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">100</span>
+        <span class="n">covariance_type</span><span class="o">=</span><span class="s2">"full"</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s2">"kmeans"</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">100</span>
     <span class="p">)</span>
     <span class="c1"># Fit model</span>
     <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)</span>
@@ -18173,14 +18190,14 @@ Nombre de lignes dans le jeu de données : 41
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">bic_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;o-&quot;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bic_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">bic_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="s2">"o-"</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bic_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"o-"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;BIC&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"BIC"</span><span class="p">)</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">silhouette_list</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">silhouette_list</span><span class="p">,</span> <span class="s2">"o-"</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_cluster_min</span><span class="p">,</span> <span class="n">n_cluster_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Score silouhette&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Score silouhette"</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -18194,7 +18211,9 @@ Nombre de lignes dans le jeu de données : 41
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[210]:</div>
 
@@ -18206,7 +18225,9 @@ Nombre de lignes dans le jeu de données : 41
 </div>
 
 </div>
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -18234,7 +18255,7 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Le score silhouette atteint un minimum à 4 clusters avant de remonter.</p>
-<p>Le score BIC n'est pas à prendre en compte à partir d'un trop grand nombre de clusters et avec un <em>dataset</em> à 41 entrées.<br />
+<p>Le score BIC n'est pas à prendre en compte à partir d'un trop grand nombre de clusters et avec un <em>dataset</em> à 41 entrées.<br>
 En effet, avec des matrices de variance-covariance libres à estimer, le nombre de paramètres à estimer devient rapidement très supérieur au nombre d'individus.</p>
 <p>Nous prendrons, en raison de la taille du jeu de données et des contraintes de l'énoncé, 3 clusters pour la suite de l'étude.</p>
 
@@ -18263,7 +18284,7 @@ En effet, avec des matrices de variance-covariance libres à estimer, le nombre 
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fit GMM with 3 clusters</span>
 
 <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span>
-    <span class="n">covariance_type</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s2">&quot;k-means++&quot;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1_000</span>
+    <span class="n">covariance_type</span><span class="o">=</span><span class="s2">"full"</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="s2">"k-means++"</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1_000</span>
 <span class="p">)</span>
 
 <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)</span>
@@ -18294,7 +18315,7 @@ En effet, avec des matrices de variance-covariance libres à estimer, le nombre 
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[212]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weights_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Poids </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">))])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weights_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">''</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">'Poids </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">weights_</span><span class="p">))])</span>
 <span class="n">weights_df</span>
 </pre></div>
 
@@ -18309,7 +18330,9 @@ En effet, avec des matrices de variance-covariance libres à estimer, le nombre 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[212]:</div>
 
@@ -18408,7 +18431,9 @@ En effet, avec des matrices de variance-covariance libres à estimer, le nombre 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[213]:</div>
 
@@ -18836,9 +18861,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[214]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le premier axe explique </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="si">}</span><span class="s2">% des données.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le deuxième axe explique </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">% des données.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Notre réduction de dimension conserve donc </span><span class="si">{</span><span class="nb">round</span><span class="p">((</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">% de l&#39;information.&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Le premier axe explique </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="si">}</span><span class="s2">% des données."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Le deuxième axe explique </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">% des données."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Notre réduction de dimension conserve donc </span><span class="si">{</span><span class="nb">round</span><span class="p">((</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">% de l'information."</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -18852,7 +18877,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -18901,17 +18928,17 @@ Notre réduction de dimension conserve donc 93.2% de l&#39;information.
 <span class="n">cluster_2_indices</span> <span class="o">=</span> <span class="n">predicted_cluster</span> <span class="o">==</span> <span class="mi">2</span>
 
 <span class="c1"># Plot only the points belonging to clusters 0, 1, and 2</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_0_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_0_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster 0&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_1_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_1_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster 1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_2_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_2_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_0_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_0_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Cluster 0'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_1_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_1_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Cluster 1'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">cluster_2_indices</span><span class="p">],</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">decathlon</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">cluster_2_indices</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">'g'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Cluster 2'</span><span class="p">)</span>
 
 <span class="c1"># Plot centers of clusters</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Centers of clusters&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Centers of clusters"</span><span class="p">)</span>
 
 <span class="c1"># Add labels and legend</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;PCA Component 1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PCA Component 2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Affichage des athlètes sur les axes d&#39;ACP, colorés par clusters&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'PCA Component 1'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'PCA Component 2'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Affichage des athlètes sur les axes d'ACP, colorés par clusters"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -18928,7 +18955,9 @@ Notre réduction de dimension conserve donc 93.2% de l&#39;information.
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -18990,23 +19019,23 @@ class="
 
 <span class="c1"># Define a function to apply styling</span>
 <span class="k">def</span> <span class="nf">highlight_max</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Highlight the maximum in a Series yellow.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">is_max</span> <span class="o">=</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;background-color: lime&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">is_max</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">'background-color: lime'</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s1">''</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">is_max</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">highlight_min</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Highlight the minimum in a Series yellow.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">is_min</span> <span class="o">=</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;background-color: yellow&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">is_min</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">'background-color: yellow'</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s1">''</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">is_min</span><span class="p">]</span>
 
 <span class="c1"># Apply styling to the DataFrame</span>
 <span class="n">styled_df</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">highlight_max</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">highlight_min</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moyenne des scores des athlètes par cluster pour chaque discipline :</span><span class="se">\n</span><span class="s2">En vert les plus haut, en jaune les faibles.</span><span class="se">\n</span><span class="s2">On prendra en compte que certaines épreuves requièrent un score faible.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Moyenne des scores des athlètes par cluster pour chaque discipline :</span><span class="se">\n</span><span class="s2">En vert les plus haut, en jaune les faibles.</span><span class="se">\n</span><span class="s2">On prendra en compte que certaines épreuves requièrent un score faible."</span><span class="p">)</span>
 
 <span class="c1"># Display the styled DataFrame</span>
 <span class="n">styled_df</span>
@@ -19023,7 +19052,9 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -19035,7 +19066,9 @@ On prendra en compte que certaines épreuves requièrent un score faible.
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+
+<div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[220]:</div>
 
